@@ -1,3 +1,3 @@
-# final-project
+# CooksCabinet
 
-A full stack JavaScript solo project.
+A full stack React application that offers users a means of creating and using recipes they can cook at home.
