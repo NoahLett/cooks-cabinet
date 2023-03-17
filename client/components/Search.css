@@ -3,12 +3,12 @@
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 50%;
-  margin-top: 5rem;
+  padding-top: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 25vh;
+  height: 35vh;
 }
 
 .input-container {
@@ -35,4 +35,5 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   font-weight: bolder;
   padding-left: 3rem;
+  margin-right: 1.5rem;
 }
