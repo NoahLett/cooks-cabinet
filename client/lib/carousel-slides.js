@@ -1,7 +1,7 @@
 const slides = [
   {
-    title: 'Slide 1',
-    imageUrl: 'https://example.com/slide1.jpg'
+    title: 'Ratatouille',
+    imageUrl: '/images/ratatouille.jpeg'
   },
   {
     title: 'Slide 2',
