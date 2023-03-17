@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
 import './Search.css';
 
 export default function Search() {
@@ -11,13 +12,15 @@ export default function Search() {
 
   return (
     <div className='search-container'>
-      <img className='search-image' src="/images/home-2.webp" alt="Beautiful Food" />
-      <input
+      <div className="input-container">
+        <FaSearch className='search-icon'/>
+        <input
         type="text"
         placeholder='Search...'
         value={searchQuery}
         onChange={handleInputChange}
         className="search-bar" />
+      </div>
     </div>
   );
 }
