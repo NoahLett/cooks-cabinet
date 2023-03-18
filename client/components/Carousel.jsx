@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import slides from '../lib/carousel-slides';
+import './Carousel.css';
 
 export default function Carousel() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -18,24 +19,27 @@ export default function Carousel() {
   };
 
   return (
-    <div className="carousel">
-      {slides.map((slide, index) => (
-        <div
+    <div className='container'>
+      <h2 className="favs">Featured Favs</h2>
+      <div className="carousel">
+        {slides.map((slide, index) => (
+          <div
           key={index}
           className={`slide ${index === activeIndex ? 'active' : ''}`}
           style={{ backgroundImage: `url(${slide.imageUrl})` }}
         >
-          <h2 className="title">{slide.title}</h2>
-        </div>
-      ))}
-      <div className="dots">
-        {slides.map((slide, index) => (
-          <button
+            <h2 className="title">{slide.title}</h2>
+          </div>
+        ))}
+        <div className="dots">
+          {slides.map((slide, index) => (
+            <button
             key={index}
             className={`dot ${index === activeIndex ? 'active' : ''}`}
             onClick={() => handleDotClick(index)}
           />
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
