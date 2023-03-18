@@ -4,16 +4,16 @@ const slides = [
     imageUrl: '/images/ratatouille.jpeg'
   },
   {
-    title: 'Slide 2',
-    imageUrl: 'https://example.com/slide2.jpg'
+    title: 'Parmesan Crusted Chicken',
+    imageUrl: '/images/parmesan-chicken.jpg'
   },
   {
-    title: 'Slide 3',
-    imageUrl: 'https://example.com/slide3.jpg'
+    title: 'Cast Iron Ribeye',
+    imageUrl: '/images/ribeye.jpg'
   },
   {
-    title: 'Slide 4',
-    imageUrl: 'https://example.com/slide4.jpg'
+    title: 'Honey Glazed Salmon',
+    imageUrl: '/images/salmon.jpg'
   }
 ];
 

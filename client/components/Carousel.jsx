@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import slides from '../lib/carousel-slides';
-import './Carousel.css';
 
 export default function Carousel() {
   const [activeIndex, setActiveIndex] = useState(0);
