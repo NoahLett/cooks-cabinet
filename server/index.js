@@ -50,6 +50,16 @@ app.post('/api/signin', async (req, res, next) => {
   }
 });
 
+app.post('/api/signout', async (req, res, next) => {
+  try {
+    res.clearCookie('token');
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
