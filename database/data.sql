@@ -1,5 +1,5 @@
-INSERT INTO "users" ("firstName", "lastName", "email", "hashedPassword", "createdAt")
-VALUES ('John', 'Doe', 'johndoe@example.com', 'mysecretpassword', CURRENT_TIMESTAMP);
+INSERT INTO "users" ("username", "hashedPassword")
+VALUES ('johndoe', 'Mysecretpassword1!');
 
 INSERT INTO "recipes" ("name", "description", "photoUrl", "steps", "ingredients", "userId")
 VALUES ('Chocolate Cake', 'A delicious chocolate cake recipe', 'https://example.com/chocolate-cake.jpg',

@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { FaCheck, FaTimes, FaInfoCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import './Register.css';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -43,17 +44,27 @@ const Register = () => {
     setErrMsg('');
   }, [user, pwd, matchPwd]);
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    setSuccess(true);
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user, pwd)
+    };
+    fetch('/api/signup', req)
+      .then(res => res.json())
+      .then(result => {
+        setSuccess(true);
+      });
   };
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
+    <div className='register-container'>
       {success
         ? (
-          <div>
+          <div className='section'>
             <h1>Success!</h1>
             <p>
               <Link to='/'>Sign In</Link>
@@ -61,11 +72,11 @@ const Register = () => {
           </div>
           )
         : (
-          <div>
+          <div className='section'>
             <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
             <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="username">
+            <form className='register-form' onSubmit={handleSubmit}>
+              <label className='register-label' htmlFor="username">
                 Username:
                 <span className={validName ? 'valid' : 'hide'}>
                   <FaCheck />
@@ -91,7 +102,7 @@ const Register = () => {
                 Letters, numbers, underscores, hyphens allowed.
               </p>
 
-              <label htmlFor="password">
+              <label className='register-label' htmlFor="password">
                 Password:
                 <span className={validPwd ? 'valid' : 'hide'}>
                   <FaCheck />
@@ -120,7 +131,7 @@ const Register = () => {
                 <span>%</span>
               </p>
 
-              <label htmlFor="confirmpwd">
+              <label className='register-label' htmlFor="confirmpwd">
                 Confirm Password:
                 <span className={validMatch && matchPwd ? 'valid' : 'hide'}>
                   <FaCheck />
@@ -142,7 +153,7 @@ const Register = () => {
                 Must match the first password input field.
               </p>
 
-              <button disabled={!!(!validName || !validPwd || !validMatch)}>Sign Up</button>
+              <button className='register-submit' disabled={!!(!validName || !validPwd || !validMatch)}>Sign Up</button>
             </form>
             <p>
               Already Registered? <br/>
@@ -152,7 +163,7 @@ const Register = () => {
             </p>
           </div>
           )}
-    </>
+    </div>
   );
 };
 
