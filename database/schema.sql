@@ -4,11 +4,9 @@ create schema "public";
 
 CREATE TABLE "public"."users" (
   "userId" SERIAL PRIMARY KEY,
-  "firstName" TEXT NOT NULL,
-  "lastName" TEXT NOT NULL,
   "username" TEXT NOT NULL UNIQUE,
   "hashedPassword" TEXT NOT NULL,
-  "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  "createdAt" timestamptz(6) DEFAULT now()
 );
 
 CREATE TABLE "public"."recipes" (
