@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { FaCheck, FaTimes, FaInfoCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './Register.css';
+import axios from 'axios';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -44,20 +45,24 @@ const Register = () => {
     setErrMsg('');
   }, [user, pwd, matchPwd]);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user, pwd)
-    };
-    fetch('/api/signup', req)
-      .then(res => res.json())
-      .then(result => {
-        setSuccess(true);
-      });
+    try {
+      const response = await axios.post('/api/auth/sign-up',
+        JSON.stringify({ user, pwd }),
+        {
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
+      setSuccess(true);
+      return response;
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('No server response');
+      } else {
+        setErrMsg('Username taken');
+      }
+    }
   };
 
   return (
@@ -65,16 +70,16 @@ const Register = () => {
       {success
         ? (
           <div className='section'>
-            <h1>Success!</h1>
+            <h1 className='success'>Success!</h1>
             <p>
-              <Link to='/'>Sign In</Link>
+              <Link className='sign-in-link' to='/'>Sign In</Link>
             </p>
           </div>
           )
         : (
           <div className='section'>
             <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
-            <h1>Register</h1>
+            <h1 className='register-header'>Register</h1>
             <form className='register-form' onSubmit={handleSubmit}>
               <label className='register-label' htmlFor="username">
                 Username:
@@ -86,15 +91,15 @@ const Register = () => {
                 </span>
               </label>
               <input
-          type="text"
-          id='username'
-          ref={userRef}
-          autoComplete='off'
-          onChange={e => setUser(e.target.value)}
-          required
-          onFocus={() => setUserFocus(true)}
-          onBlur={() => setUserFocus(false)}
-        />
+                className='input-field'
+                type="text"
+                id='username'
+                ref={userRef}
+                autoComplete='off'
+                onChange={e => setUser(e.target.value)}
+                required
+                onFocus={() => setUserFocus(true)}
+                onBlur={() => setUserFocus(false)}/>
               <p className={userFocus && user && !validName ? 'instructions' : 'offscreen'}>
                 <FaInfoCircle />
                 4 to 24 characters.<br />
@@ -112,13 +117,13 @@ const Register = () => {
                 </span>
               </label>
               <input
-          type="password"
-          id='password'
-          onChange={e => setPwd(e.target.value)}
-          required
-          onFocus={() => setPwdFocus(true)}
-          onBlur={() => setPwdFocus(false)}
-        />
+                className='input-field'
+                type="password"
+                id='password'
+                onChange={e => setPwd(e.target.value)}
+                required
+                onFocus={() => setPwdFocus(true)}
+                onBlur={() => setPwdFocus(false)}/>
               <p className={pwdFocus && !validPwd ? 'instructions' : 'offscreen'}>
                 <FaInfoCircle />
                 8 to 24 characters.<br />
@@ -141,13 +146,13 @@ const Register = () => {
                 </span>
               </label>
               <input
-          type="password"
-          id='confirmpwd'
-          onChange={e => setMatchPwd(e.target.value)}
-          required
-          onFocus={() => setMatchFocus(true)}
-          onBlur={() => setMatchFocus(false)}
-        />
+                className='input-field'
+                type="password"
+                id='confirmpwd'
+                onChange={e => setMatchPwd(e.target.value)}
+                required
+                onFocus={() => setMatchFocus(true)}
+                onBlur={() => setMatchFocus(false)}/>
               <p className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}>
                 <FaInfoCircle />
                 Must match the first password input field.
@@ -158,7 +163,7 @@ const Register = () => {
             <p>
               Already Registered? <br/>
               <span>
-                <Link to='/'>Sign In</Link>
+                <Link className='sign-in-link' to='/'>Sign In</Link>
               </span>
             </p>
           </div>

@@ -5,6 +5,12 @@
   align-items: center;
   min-height: 100vh;
   padding: 1rem 0.5rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  color: darkslategrey;
+}
+
+.register-header {
+  text-align: center;
 }
 
 .section {
@@ -15,7 +21,7 @@
   flex-direction: column;
   justify-content: flex-start;
   padding: 1rem;
-  background-color: #ee6e73;
+  background-color: rgba(238, 110, 115, 0.8);
   border-radius: 5px;
 }
 
@@ -31,6 +37,16 @@
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   font-size: 1.25rem;
   margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.input-field {
+  height: 2.25rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  padding-left: 0.5rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 .register-submit {
@@ -53,6 +69,12 @@
   padding: 0.25rem;
   position: relative;
   bottom: -10px;
+}
+
+.success {
+  font-size: 1.25rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  text-align: center;
 }
 
 .instructions > svg {
@@ -88,4 +110,9 @@
 
 .line {
   display: inline-block;
+}
+
+.sign-in-link {
+  text-decoration: none;
+  color: darkslategrey;
 }
