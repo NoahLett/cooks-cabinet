@@ -7,9 +7,9 @@ const staticMiddleware = module.exports = [
   express.static(publicPath)
 ];
 
-staticMiddleware.push((req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
-});
+// staticMiddleware.push((req, res) => {
+//   res.sendFile(path.join(publicPath, 'index.html'));
+// });
 
 if (process.env.NODE_ENV === 'development') {
   staticMiddleware.unshift(...devMiddleware());

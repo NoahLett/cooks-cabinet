@@ -1,4 +1,5 @@
 require('dotenv/config');
+const path = require('path');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
 const errorMiddleware = require('./error-middleware');
@@ -30,12 +31,22 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       const params = [user, hashedPassword];
       db.query(sql, params)
         .then(result => {
-          const [newUser] = result.rows;
+          const newUser = result.rows[0];
           res.status(201).json(newUser);
         })
         .catch(err => next(err));
     })
     .catch(err => next(err));
+});
+
+app.use('/api', (req, res) => {
+  res.status(404).json({ error: `cannot ${req.method} ${req.url}` });
+});
+
+app.use((req, res) => {
+  res.sendFile('/index.html', {
+    root: path.join(__dirname, 'public')
+  });
 });
 
 app.use(errorMiddleware);
