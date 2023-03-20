@@ -14,18 +14,49 @@ const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL
 });
 
-app.post('/api/signup', async (req, res) => {
+app.post('/api/signup', async (req, res, next) => {
   try {
     const { firstName, lastName, username, password } = req.body;
     const hashedPassword = await argon2.hash(password);
     const result = await db.query(
-      'INSERT INTO users (firstName, lastName, username, hashedPassword) VALUES ($1, $2, $3, $4) RETURNING userId', [firstName, lastName, username, hashedPassword]
+      'INSERT INTO users (firstName, lastName, username, hashedPassword) VALUES ($1, $2, $3, $4) RETURNING userId, username', [firstName, lastName, username, hashedPassword]
     );
-    const token = jwt.sign({ id: result.rows[0].id }, process.env.TOKEN_SECRET);
+    const token = jwt.sign({ id: result.rows[0].userId }, process.env.TOKEN_SECRET);
     res.json({ token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    next(error);
+  }
+});
+
+app.post('/api/signin', async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    const result = await db.query(
+      'SELECT * FROM users WHERE username = $1', [username]
+    );
+    if (result.rows.length === 0) {
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+    const isValidPassword = await argon2.verify(result.rows[0].password, password);
+    if (!isValidPassword) {
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+    const token = jwt.sign({ id: result.rows[0].userId }, process.env.TOKEN_SECRET);
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+app.post('/api/signout', async (req, res, next) => {
+  try {
+    res.clearCookie('token');
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    next(error);
   }
 });
 
