@@ -57,7 +57,7 @@ const Register = () => {
       setSuccess(true);
       return response;
     } catch (err) {
-      if (!err?.response) {
+      if (!err.response) {
         setErrMsg('No server response');
       } else {
         setErrMsg('Username taken');
