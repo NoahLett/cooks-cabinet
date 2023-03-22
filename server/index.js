@@ -21,28 +21,28 @@ const jsonMiddleware = express.json();
 app.use(jsonMiddleware);
 
 app.post('/api/auth/sign-up', (req, res, next) => {
-  const { user, pwd } = req.body;
-  if (!user || !pwd) {
-    return res.status(400).json({ message: 'Username and password are required.' });
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(401, 'Both a username and password are required');
   }
   const check = `
     SELECT * FROM "users" WHERE username = $1
     `;
-  const checkParams = [user];
+  const checkParams = [username];
   db.query(check, checkParams)
     .then(result => {
       if (result.rows[0]) {
-        return res.sendStatus(409);
+        throw new ClientError(409, 'Username taken');
       }
       bcrypt
-        .hash(pwd, 10)
+        .hash(password, 10)
         .then(hashedPassword => {
           const sql = `
         insert into "users" ("username", "hashedPassword")
         values ($1, $2)
         returning "userId", "username", "createdAt"
         `;
-          const params = [user, hashedPassword];
+          const params = [username, hashedPassword];
           db.query(sql, params)
             .then(result => {
               const newUser = result.rows[0];
@@ -56,8 +56,8 @@ app.post('/api/auth/sign-up', (req, res, next) => {
 });
 
 app.post('/api/auth/sign-in', (req, res, next) => {
-  const { user, pwd } = req.body;
-  if (!user || !pwd) {
+  const { username, password } = req.body;
+  if (!username || !password) {
     throw new ClientError(401, 'invalid login');
   }
   const sql = `
@@ -67,34 +67,27 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     from "users"
     where "username" = $1
     `;
-  const params = [user];
+  const params = [username];
   db.query(sql, params)
     .then(result => {
-      const [foundUser] = result.rows;
-      if (!foundUser) {
+      const [user] = result.rows;
+      if (!user) {
         throw new ClientError(401, 'invalid login');
       }
-      const { username, hashedPassword } = foundUser;
+      const { userId, username, hashedPassword } = user;
       bcrypt
-        .compare(pwd, hashedPassword)
+        .compare(password, hashedPassword)
         .then(isMatching => {
           if (!isMatching) {
             throw new ClientError(401, 'invalid login');
           }
-          const accessToken = jwt.sign(
-            { username },
-            process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '300s' }
-          );
-          const refreshToken = jwt.sign(
-            { username },
-            process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '1d' }
-          );
-          res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
-          res.json({ accessToken });
-        });
-    });
+          const payload = { userId, username };
+          const token = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET);
+          res.json({ token, user: payload });
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
 });
 
 app.use('/api', (req, res) => {

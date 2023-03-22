@@ -12,11 +12,11 @@ const Register = () => {
   const userRef = useRef();
   const errRef = useRef();
 
-  const [user, setUser] = useState('');
+  const [username, setUsername] = useState('');
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
 
-  const [pwd, setPwd] = useState('');
+  const [password, setPassword] = useState('');
   const [validPwd, setValidPwd] = useState(false);
   const [pwdFocus, setPwdFocus] = useState(false);
 
@@ -32,24 +32,24 @@ const Register = () => {
   }, []);
 
   useEffect(() => {
-    setValidName(USER_REGEX.test(user));
-  }, [user]);
+    setValidName(USER_REGEX.test(username));
+  }, [username]);
 
   useEffect(() => {
-    setValidPwd(PWD_REGEX.test(pwd));
-    const match = pwd === matchPwd;
+    setValidPwd(PWD_REGEX.test(password));
+    const match = password === matchPwd;
     setValidMatch(match);
-  }, [pwd, matchPwd]);
+  }, [password, matchPwd]);
 
   useEffect(() => {
     setErrMsg('');
-  }, [user, pwd, matchPwd]);
+  }, [username, password, matchPwd]);
 
   const handleSubmit = async e => {
     e.preventDefault();
     try {
       const response = await axios.post('/api/auth/sign-up',
-        JSON.stringify({ user, pwd }),
+        JSON.stringify({ username, password }),
         {
           headers: { 'Content-Type': 'application/json' }
         }
@@ -86,7 +86,7 @@ const Register = () => {
                 <span className={validName ? 'valid' : 'hide'}>
                   <FaCheck />
                 </span>
-                <span className={validName || !user ? 'hide' : 'invalid'}>
+                <span className={validName || !username ? 'hide' : 'invalid'}>
                   <FaTimes />
                 </span>
               </label>
@@ -96,11 +96,11 @@ const Register = () => {
                 id='username'
                 ref={userRef}
                 autoComplete='off'
-                onChange={e => setUser(e.target.value)}
+                onChange={e => setUsername(e.target.value)}
                 required
                 onFocus={() => setUserFocus(true)}
                 onBlur={() => setUserFocus(false)}/>
-              <p className={userFocus && user && !validName ? 'instructions' : 'offscreen'}>
+              <p className={userFocus && username && !validName ? 'instructions' : 'offscreen'}>
                 <FaInfoCircle />
                 4 to 24 characters.<br />
                 Must begin with a letter.<br />
@@ -112,7 +112,7 @@ const Register = () => {
                 <span className={validPwd ? 'valid' : 'hide'}>
                   <FaCheck />
                 </span>
-                <span className={validPwd || !pwd ? 'hide' : 'invalid'}>
+                <span className={validPwd || !password ? 'hide' : 'invalid'}>
                   <FaTimes />
                 </span>
               </label>
@@ -120,7 +120,7 @@ const Register = () => {
                 className='input-field'
                 type="password"
                 id='password'
-                onChange={e => setPwd(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 required
                 onFocus={() => setPwdFocus(true)}
                 onBlur={() => setPwdFocus(false)}/>
