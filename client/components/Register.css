@@ -15,13 +15,13 @@
 
 .section {
   width: 100%;
-  max-width: 420px;
+  max-width: 25rem;
   min-height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: 1rem;
-  background-color: rgba(238, 110, 115, 0.8);
+  background-color: rgba(238, 110, 115, 0.5);
   border-radius: 5px;
 }
 
@@ -52,19 +52,25 @@
 .register-submit {
   height: 2.75rem;
   border-radius: 0.75rem;
-  border: none;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   font-size: 1.25rem;
-  background-color: white;
+  background-color: rgb(236, 211, 211);
+  border: 1px solid #f09fa2;
   color: darkslategray;
   cursor: pointer;
   margin-top: 1.5rem;
 }
 
+.register-submit:hover {
+  background-color: #ee6e73;
+  color: white;
+  transition: all 0.5s;
+}
+
 .instructions {
   font-size: 0.75rem;
   border-radius: 0.5rem;
-  background: #000;
+  background: darkslategray;
   color: #fff;
   padding: 0.25rem;
   position: relative;
@@ -101,7 +107,7 @@
 }
 
 .errmsg {
-  background-color: lightpink;
+  background-color: rgba(253, 105, 127, 0.4);
   color: firebrick;
   font-weight: bold;
   padding: 0.5rem;
@@ -113,6 +119,5 @@
 }
 
 .sign-in-link {
-  text-decoration: none;
   color: darkslategrey;
 }

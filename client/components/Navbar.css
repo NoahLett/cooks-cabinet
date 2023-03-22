@@ -25,7 +25,7 @@
 .menu-icon {
   display: flex;
   align-items: center;
-  margin-left: 2rem;
+  margin-left: 1rem;
   font-size: 1.8rem;
   cursor: pointer;
   color: white;
@@ -44,7 +44,7 @@
 }
 
 .user-icon {
-  margin-right: 2rem;
+  margin-right: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,7 +58,6 @@
   justify-content: center;
   list-style: none;
   width: 90%;
-  max-width: 50rem;
   height: 100vh;
   position: absolute;
   top: 4rem;
@@ -70,7 +69,7 @@
 .nav-menu.active {
   background: lightgrey;
   left: 0;
-  opacity: 1;
+  opacity: 0.95;
   transition: all 0.5s ease;
   z-index: 1;
 }
