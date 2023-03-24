@@ -25,8 +25,8 @@ const SignIn = () => {
     <div className='signin-container'>
       { success
         ? (
-          <div className='success-container'>
-            <h1 className='success-header'>`Welcome back, ${username}`</h1>
+          <div className='welcome-container'>
+            <h1 className='welcome-header'>`Welcome back, ${username}`</h1>
             <p>
               <Link to='/'>Create a Recipe</Link>
             </p>
