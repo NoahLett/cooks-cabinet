@@ -22,6 +22,21 @@ const SignIn = () => {
   }, [username, password]);
 
   return (
-    <div />
+    <div className='signin-container'>
+      { success
+        ? (
+          <div className='success-container'>
+            <h1 className='success-header'>`Welcome back, ${username}`</h1>
+            <p>
+              <Link to='/'>Create a Recipe</Link>
+            </p>
+          </div>
+          )
+        : (
+          <div>
+            <h1 />
+          </div>
+          )}
+    </div>
   );
 };
