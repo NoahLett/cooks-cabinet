@@ -10,6 +10,8 @@ const SignIn = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [userFocus, setUserFocus] = useState(false);
+  const [pwdFocus, setPwdFocus] = useState(false);
   const [errMsg, setErrMsg] = useState();
   const [success, setSuccess] = useState(false);
 
@@ -33,8 +35,24 @@ const SignIn = () => {
           </div>
           )
         : (
-          <div>
-            <h1 />
+          <div className='signin-component'>
+            <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreeen'}>{errMsg}</p>
+            <h1 className='signin-header'>Sign In</h1>
+            <form className='signin-form'>
+              <label className='signin-label' htmlFor="username">
+                Username:
+              </label>
+              <input
+                type="text"
+                className='signin-input'
+                id='username'
+                ref={userRef}
+                autoComplete='off'
+                onChange={e => setUsername(e.target.value)}
+                required
+                onFocus={() => setUserFocus(true)}
+                onBlur={() => setUserFocus(false)} />
+            </form>
           </div>
           )}
     </div>
