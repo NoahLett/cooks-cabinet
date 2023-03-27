@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './SignIn.css';
-import axios from 'axios';
 
 const SignIn = () => {
 
@@ -10,8 +9,6 @@ const SignIn = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [userFocus, setUserFocus] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
   const [errMsg, setErrMsg] = useState();
   const [success, setSuccess] = useState(false);
 
@@ -22,6 +19,11 @@ const SignIn = () => {
   useEffect(() => {
     setErrMsg('');
   }, [username, password]);
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setSuccess(true);
+  };
 
   return (
     <div className='signin-container'>
@@ -38,7 +40,7 @@ const SignIn = () => {
           <div className='signin-component'>
             <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreeen'}>{errMsg}</p>
             <h1 className='signin-header'>Sign In</h1>
-            <form className='signin-form'>
+            <form className='signin-form' onSubmit={handleSubmit}>
               <label className='signin-label' htmlFor="username">
                 Username:
               </label>
@@ -50,8 +52,8 @@ const SignIn = () => {
                 autoComplete='off'
                 onChange={e => setUsername(e.target.value)}
                 required
-                onFocus={() => setUserFocus(true)}
-                onBlur={() => setUserFocus(false)} />
+                autoFocus
+                  />
 
               <label className='signin-label' htmlFor='password'>
                 Password:
@@ -62,8 +64,7 @@ const SignIn = () => {
                 id='password'
                 onChange={e => setPassword(e.target.value)}
                 required
-                onFocus={() => setPwdFocus(true)}
-                onBlur={() => setPwdFocus(false)} />
+                  />
 
               <button className='signin-submit' disabled={!!(!username || !password)}>Sign In</button>
             </form>
@@ -75,3 +76,5 @@ const SignIn = () => {
     </div>
   );
 };
+
+export default SignIn;
