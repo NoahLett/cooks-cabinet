@@ -52,7 +52,24 @@ const SignIn = () => {
                 required
                 onFocus={() => setUserFocus(true)}
                 onBlur={() => setUserFocus(false)} />
+
+              <label className='signin-label' htmlFor='password'>
+                Password:
+              </label>
+              <input
+                type="password"
+                className='signin-input'
+                id='password'
+                onChange={e => setPassword(e.target.value)}
+                required
+                onFocus={() => setPwdFocus(true)}
+                onBlur={() => setPwdFocus(false)} />
+
+              <button className='signin-submit' disabled={!!(!username || !password)}>Sign In</button>
             </form>
+            <p>
+              Create an Account <Link className='register-link' to='/signup'>Here</Link>
+            </p>
           </div>
           )}
     </div>
