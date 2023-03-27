@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './SignIn.css';
-import axios from 'axios';
 
 const SignIn = () => {
 
@@ -21,6 +20,11 @@ const SignIn = () => {
     setErrMsg('');
   }, [username, password]);
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setSuccess(true);
+  };
+
   return (
     <div className='signin-container'>
       { success
@@ -33,10 +37,44 @@ const SignIn = () => {
           </div>
           )
         : (
-          <div>
-            <h1 />
+          <div className='signin-component'>
+            <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreeen'}>{errMsg}</p>
+            <h1 className='signin-header'>Sign In</h1>
+            <form className='signin-form' onSubmit={handleSubmit}>
+              <label className='signin-label' htmlFor="username">
+                Username:
+              </label>
+              <input
+                type="text"
+                className='signin-input'
+                id='username'
+                ref={userRef}
+                autoComplete='off'
+                onChange={e => setUsername(e.target.value)}
+                required
+                autoFocus
+                  />
+
+              <label className='signin-label' htmlFor='password'>
+                Password:
+              </label>
+              <input
+                type="password"
+                className='signin-input'
+                id='password'
+                onChange={e => setPassword(e.target.value)}
+                required
+                  />
+
+              <button className='signin-submit' disabled={!!(!username || !password)}>Sign In</button>
+            </form>
+            <p>
+              Create an Account <Link className='register-link' to='/signup'>Here</Link>
+            </p>
           </div>
           )}
     </div>
   );
 };
+
+export default SignIn;
