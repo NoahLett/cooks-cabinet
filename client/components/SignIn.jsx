@@ -1,16 +1,19 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signIn } from '../redux/authSlice';
 import './SignIn.css';
 
 const SignIn = () => {
 
+  const isLoggedIn = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
   const userRef = useRef();
   const errRef = useRef();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState();
-  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -22,15 +25,19 @@ const SignIn = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setSuccess(true);
+    try {
+      await dispatch(signIn(username, password));
+    } catch (error) {
+      setErrMsg(error.message);
+    }
   };
 
   return (
     <div className='signin-container'>
-      { success
+      { isLoggedIn
         ? (
           <div className='success-container'>
-            <h1 className='success-header'>`Welcome back, ${username}`</h1>
+            <h1 className='success-header'>Welcome back, ${username}</h1>
             <p>
               <Link to='/'>Create a Recipe</Link>
             </p>
