@@ -19,29 +19,29 @@ export default function Navbar() {
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'} onClick={closeMobileMenu}>
             <li className='nav-item'>
-              <a href='#' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                 Home
-              </a>
+              </Link>
             </li>
             <li className='nav-item'>
-              <a href='#wanted' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                 Wanted Books
-              </a>
+              </Link>
             </li>
             <li className='nav-item'>
-              <a href='#for-sale' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                 Books for Sale
-              </a>
+              </Link>
             </li>
             <li className='nav-item'>
-              <a href='#post-form' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                 Post
-              </a>
+              </Link>
             </li>
             <li className='nav-item'>
-              <a href='#faq' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                 FAQ
-              </a>
+              </Link>
             </li>
             <li className='nav-item'>
               <button className='nav-links'>Sign Up</button>
