@@ -68,7 +68,7 @@ const SignIn = () => {
 
               <button className='signin-submit' disabled={!!(!username || !password)}>Sign In</button>
             </form>
-            <p>
+            <p className='register-link'>
               Create an Account <Link className='register-link' to='/signup'>Here</Link>
             </p>
           </div>
