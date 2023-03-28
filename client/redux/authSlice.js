@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   user: null,
@@ -37,5 +38,21 @@ export const {
   loginFailure,
   logout
 } = authSlice.actions;
+
+export const signIn = (username, password) => async dispatch => {
+  try {
+    dispatch(loginRequest());
+    const response = await axios.post('/api/auth/sign-in', { username, password });
+    localStorage.setItem('token', response.data.token);
+    dispatch(loginSuccess(response.data.user));
+  } catch (error) {
+    dispatch(loginFailure(error.response.data));
+  }
+};
+
+export const signOut = () => async dispatch => {
+  localStorage.removeItem('token');
+  dispatch(logout());
+};
 
 export default authSlice.reducer;
