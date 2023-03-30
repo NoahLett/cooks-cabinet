@@ -43,6 +43,26 @@
   font-weight: bold;
 }
 
+.user-button {
+  color: #4d4c4c;
+  background-color: transparent;
+  border: 1px solid darkslategrey;
+  width: 5rem;
+  height: 2.5rem;
+  margin-right: 2rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-size: 1.05rem;
+}
+
+.user-link {
+  text-decoration: none;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  color: #4d4c4c;
+  font-size: 1.15rem;
+}
+
 .user-icon {
   margin-right: 1rem;
   display: flex;
@@ -50,6 +70,10 @@
   align-items: center;
   font-size: 1.8rem;
   color: white;
+}
+
+.user-initial {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 
 .nav-menu {

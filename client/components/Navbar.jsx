@@ -57,14 +57,14 @@ export default function Navbar() {
               </Link>
             </li>
             <li className='nav-item'>
-              <div>{isLoggedIn ? <button onClick={handleSignOut}>Sign Out</button> : <button><Link to='/signin'>Sign In</Link></button>}</div>
+              <div>{isLoggedIn ? <button className='user-button' onClick={handleSignOut}>Sign Out</button> : <button className='user-button'><Link className='user-link' to='/signin'>Sign In</Link></button>}</div>
             </li>
           </ul>
           <Link to='/' className='navbar-logo'>
             CooksCabinet
           </Link>
           <div className="user-icon">
-            <FaUser/>
+            {isLoggedIn ? <h4 className='user-initial'>{isLoggedIn.username[0]}</h4> : <FaUser/>}
           </div>
         </div>
       </nav>
