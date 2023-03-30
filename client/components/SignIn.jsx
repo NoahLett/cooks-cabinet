@@ -37,7 +37,7 @@ const SignIn = () => {
       { isLoggedIn
         ? (
           <div className='success-container'>
-            <h1 className='success-header'>Welcome back, ${username}</h1>
+            <h1 className='success-header'>Welcome back, {username}!</h1>
             <p>
               <Link to='/'>Create a Recipe</Link>
             </p>
