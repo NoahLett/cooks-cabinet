@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOut } from '../redux/authSlice';
 import './Navbar.css';
 import { FaBars, FaTimes, FaUser } from 'react-icons/fa';
 
 export default function Navbar() {
 
+  const isLoggedIn = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
+
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
+  const handleSignOut = async e => {
+    try {
+      await dispatch(signOut());
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   return (
     <div>
