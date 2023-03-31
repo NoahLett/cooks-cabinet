@@ -7,6 +7,7 @@ const ClientError = require('./client-error');
 const pg = require('pg');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const verifyJWT = require('./verify-jwt');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -86,6 +87,30 @@ app.post('/api/auth/sign-in', (req, res, next) => {
           res.json({ token, user: payload });
         })
         .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+// Protected Routes //
+
+app.use(verifyJWT);
+
+app.post('/api/new-recipe', (req, res, next) => {
+  const { userId } = req.user;
+  const { name, description, photoUrl, steps, ingredients } = req.body;
+  if (!name || !description || !photoUrl || !steps || !ingredients) {
+    throw new ClientError(401, 'Please ensure all fields are properly filled');
+  }
+  const sql = `
+    INSERT INTO recipes ("name", "description", "photoUrl", "steps", "ingredients", "userId")
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING *
+  `;
+  const params = [name, description, photoUrl, steps, ingredients, userId];
+  db.query(sql, params)
+    .then(result => {
+      const [recipe] = result.rows;
+      res.status(201).json(recipe);
     })
     .catch(err => next(err));
 });
