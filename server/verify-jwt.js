@@ -1,22 +1,14 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 const ClientError = require('./client-error');
 
-const verifyJWT = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) return new ClientError(401, 'Access Denied');
-  // eslint-disable-next-line no-console
-  console.log(authHeader);
-  const token = authHeader.split(' ')[1];
-  jwt.verify(
-    token,
-    process.env.ACCESS_TOKEN_SECRET,
-    (err, decoded) => {
-      if (err) return new ClientError(403, 'invalid token');
-      req.user = decoded.username;
-      next();
-    }
-  );
-};
+function authorizationMiddleware(req, res, next) {
+  const token = req.get('X-Access-Token');
+  if (!token) {
+    throw new ClientError(401, 'authentication required');
+  }
+  const payload = jwt.verify(token, process.env.TOKEN_SECRET);
+  req.user = payload;
+  next();
+}
 
-module.exports = verifyJWT;
+module.exports = authorizationMiddleware;
