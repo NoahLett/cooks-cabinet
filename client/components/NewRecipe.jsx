@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './NewRecipe.css';
 import axios from 'axios';
 
 export default function NewRecipe() {
@@ -31,7 +32,7 @@ export default function NewRecipe() {
   };
 
   return (
-    <div>
+    <div className='new-recipe-component'>
       <form onSubmit={handleSubmit}>
         {errMsg && <p className='error'>{errMsg}</p>}
         {success && <p className='success'>Recipe submitted successfully!</p>}

@@ -1,5 +1,7 @@
 set client_min_messages to warning;
 
+drop SCHEMA "public" cascade;
+
 create schema "public";
 
 CREATE TABLE "public"."users" (
@@ -14,8 +16,8 @@ CREATE TABLE "public"."recipes" (
   "name" TEXT NOT NULL,
   "description" TEXT NOT NULL,
   "photoUrl" TEXT NOT NULL,
-  "steps" TEXT[] NOT NULL,
-  "ingredients" TEXT[] NOT NULL,
+  "steps" TEXT NOT NULL,
+  "ingredients" TEXT NOT NULL,
   "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   "deleted" BOOLEAN DEFAULT FALSE,
