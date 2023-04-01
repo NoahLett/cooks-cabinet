@@ -29,4 +29,24 @@ export default function NewRecipeForm() {
       setErrMsg(error.message);
     }
   };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        {errMsg && <p className='error'>{errMsg}</p>}
+        {success && <p className='success'>Recipe submitted successfully!</p>}
+        <label htmlFor="name">Recipe Name:</label>
+        <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} required />
+        <label htmlFor="description">Description:</label>
+        <textarea id="description" value={description} onChange={e => setDescription(e.target.value)} required />
+        <label htmlFor="photoUrl">Photo URL:</label>
+        <input type="text" id="photoUrl" value={photoUrl} onChange={e => setPhotoUrl(e.target.value)} required />
+        <label htmlFor="steps">Steps (comma separated):</label>
+        <input type="text" id="steps" value={steps} onChange={e => setSteps(e.target.value)} required />
+        <label htmlFor="ingredients">Ingredients (comma separated):</label>
+        <input type="text" id="ingredients" value={ingredients} onChange={e => setIngredients(e.target.value)} required />
+        <button type="submit">Submit Recipe</button>
+      </form>
+    </div>
+  );
 }
