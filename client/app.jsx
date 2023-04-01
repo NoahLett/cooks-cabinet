@@ -6,6 +6,7 @@ import SignUp from './pages/sign-up';
 import Login from './pages/sign-in';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import UserForm from './pages/user-form';
 
 export default class App extends React.Component {
   render() {
@@ -18,6 +19,7 @@ export default class App extends React.Component {
               <Route path='/' exact element={<Home/>} />
               <Route path='/signup' element={<SignUp/>} />
               <Route path='/signin' element={<Login/>} />
+              <Route path='/userform' element={<UserForm/>}/>
             </Routes>
           </Router>
         </div>
