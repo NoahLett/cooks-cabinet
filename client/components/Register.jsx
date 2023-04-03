@@ -72,7 +72,7 @@ const Register = () => {
           <div className='section'>
             <h1 className='success'>Success!</h1>
             <p>
-              <Link className='sign-in-link' to='/'>Sign In</Link>
+              <Link className='sign-in-link' to='/signin'>Sign In</Link>
             </p>
           </div>
           )
