@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './NewRecipe.css';
 import axios from 'axios';
 
 export default function NewRecipe() {
+
+  const errRef = useRef();
+
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
@@ -32,22 +35,58 @@ export default function NewRecipe() {
   };
 
   return (
-    <div className='new-recipe-component'>
-      <form onSubmit={handleSubmit}>
-        {errMsg && <p className='error'>{errMsg}</p>}
-        {success && <p className='success'>Recipe submitted successfully!</p>}
-        <label htmlFor="name">Recipe Name:</label>
-        <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} required />
-        <label htmlFor="description">Description:</label>
-        <textarea id="description" value={description} onChange={e => setDescription(e.target.value)} required />
-        <label htmlFor="photoUrl">Photo URL:</label>
-        <input type="text" id="photoUrl" value={photoUrl} onChange={e => setPhotoUrl(e.target.value)} required />
-        <label htmlFor="steps">Steps (comma separated):</label>
-        <input type="text" id="steps" value={steps} onChange={e => setSteps(e.target.value)} required />
-        <label htmlFor="ingredients">Ingredients (comma separated):</label>
-        <input type="text" id="ingredients" value={ingredients} onChange={e => setIngredients(e.target.value)} required />
-        <button type="submit">Submit Recipe</button>
-      </form>
+    <div className='new-recipe-container'>
+      {success
+        ? (
+          <div className='new-recipe-section'>
+            <h1 className='new-recipe-success'>Success!</h1>
+          </div>
+          )
+        : (
+          <div className='new-recipe-section'>
+            <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
+            <h1 className='new-recipe-header'>New Recipe</h1>
+            <form className='new-recipe-form' onSubmit={handleSubmit}>
+              <label className='new-recipe-label' htmlFor="name">Recipe Name:</label>
+              <input
+          className='new-recipe-input-field'
+          type="text"
+          id="name"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          required />
+              <label className='new-recipe-label' htmlFor="description">Description:</label>
+              <textarea
+          id="description"
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+          required />
+              <label className='new-recipe-label' htmlFor="photoUrl">Photo URL:</label>
+              <input
+          className='new-recipe-input-field'
+          type="text"
+          id="photoUrl"
+          value={photoUrl}
+          onChange={e => setPhotoUrl(e.target.value)}
+          required />
+              <label className='new-recipe-label' htmlFor="steps">Steps (comma separated):</label>
+              <textarea
+          type="text"
+          id="steps"
+          value={steps}
+          onChange={e => setSteps(e.target.value)}
+          required />
+              <label className='new-recipe-label' htmlFor="ingredients">Ingredients (comma separated):</label>
+              <textarea
+          type="text"
+          id="ingredients"
+          value={ingredients}
+          onChange={e => setIngredients(e.target.value)}
+          required />
+              <button className='new-recipe-submit' type="submit">Submit Recipe</button>
+            </form>
+          </div>
+          )}
     </div>
   );
 }
