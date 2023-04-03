@@ -38,17 +38,12 @@ export default function Navbar() {
             </li>
             <li className='nav-item'>
               <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                Wanted Books
+                Recipes
               </Link>
             </li>
             <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                Books for Sale
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                Post
+              <Link to='/userform' className='nav-links' onClick={closeMobileMenu}>
+                Post a Recipe
               </Link>
             </li>
             <li className='nav-item'>

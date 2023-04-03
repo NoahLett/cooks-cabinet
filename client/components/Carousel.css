@@ -60,7 +60,7 @@
 .dot {
   height: 0.7rem;
   border-radius: 50%;
-  border: 0.5px solid lightgray;
+  border: none;
   background-color: lightgray;
   opacity: 0.8;
   margin: 0 0.5rem;
@@ -72,6 +72,6 @@
 
 .dot.active {
   background-color: white;
-  border: 0.5px solid white;
+  border: none;
   opacity: 1;
 }

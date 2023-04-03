@@ -39,7 +39,7 @@ export default function NewRecipe() {
       {success
         ? (
           <div className='new-recipe-section'>
-            <h1 className='new-recipe-success'>Success!</h1>
+            <h1 className='new-recipe-success'>Nice Recipe!</h1>
           </div>
           )
         : (
