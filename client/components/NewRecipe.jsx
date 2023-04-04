@@ -17,12 +17,17 @@ export default function NewRecipe() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('token');
       const response = await axios.post('/api/new-recipe', {
         name,
         description,
         photoUrl,
         steps: steps.split(','),
         ingredients: ingredients.split(',')
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
 
       const recipe = response.data;
