@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../redux/authSlice';
 import './Navbar.css';
 import { FaBars, FaTimes, FaUser } from 'react-icons/fa';
+import { GiChefToque } from 'react-icons/gi';
 
 export default function Navbar() {
 
@@ -31,6 +32,9 @@ export default function Navbar() {
             {click ? <FaTimes onClick={handleClick}/> : <FaBars onClick={handleClick}/>}
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'} onClick={closeMobileMenu}>
+            <li className='chef-hat'>
+              <GiChefToque/>
+            </li>
             <li className='nav-item'>
               <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                 Home
@@ -43,7 +47,7 @@ export default function Navbar() {
             </li>
             <li className='nav-item'>
               <Link to='/userform' className='nav-links' onClick={closeMobileMenu}>
-                Post a Recipe
+                New Recipe
               </Link>
             </li>
             <li className='nav-item'>

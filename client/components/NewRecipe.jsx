@@ -17,12 +17,17 @@ export default function NewRecipe() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('token');
       const response = await axios.post('/api/new-recipe', {
         name,
         description,
         photoUrl,
         steps: steps.split(','),
         ingredients: ingredients.split(',')
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
 
       const recipe = response.data;
@@ -30,7 +35,7 @@ export default function NewRecipe() {
       console.log(recipe);
       setSuccess(true);
     } catch (error) {
-      setErrMsg(error.message);
+      setErrMsg('Oops! Please make sure to sign in first!');
     }
   };
 
@@ -46,43 +51,52 @@ export default function NewRecipe() {
           <div className='new-recipe-section'>
             <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'}>{errMsg}</p>
             <h1 className='new-recipe-header'>New Recipe</h1>
+            <img className='new-recipe-image' src={photoUrl || '/images/food.png'} alt="food-img" />
             <form className='new-recipe-form' onSubmit={handleSubmit}>
               <label className='new-recipe-label' htmlFor="name">Recipe Name:</label>
               <input
-          className='new-recipe-input-field'
-          type="text"
-          id="name"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          required />
-              <label className='new-recipe-label' htmlFor="description">Description:</label>
-              <textarea
-          id="description"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-          required />
+                placeholder="i.e.: Fried Chicken"
+                className='new-recipe-input-field'
+                type="text"
+                id="name"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                required />
               <label className='new-recipe-label' htmlFor="photoUrl">Photo URL:</label>
               <input
-          className='new-recipe-input-field'
-          type="text"
-          id="photoUrl"
-          value={photoUrl}
-          onChange={e => setPhotoUrl(e.target.value)}
-          required />
-              <label className='new-recipe-label' htmlFor="steps">Steps (comma separated):</label>
+                placeholder="i.e.: https://food-picture.com/"
+                className='new-recipe-input-field'
+                type="text"
+                id="photoUrl"
+                value={photoUrl}
+                onChange={e => setPhotoUrl(e.target.value)}
+                required />
+              <label className='new-recipe-label' htmlFor="description">Description:</label>
               <textarea
-          type="text"
-          id="steps"
-          value={steps}
-          onChange={e => setSteps(e.target.value)}
-          required />
+                className='new-recipe-textarea'
+                placeholder="i.e.: The best comfort food you'll ever make!"
+                id="description"
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+                required />
               <label className='new-recipe-label' htmlFor="ingredients">Ingredients (comma separated):</label>
               <textarea
-          type="text"
-          id="ingredients"
-          value={ingredients}
-          onChange={e => setIngredients(e.target.value)}
-          required />
+                placeholder="6 Chicken Thighs, 2 cups of bread crumbs, 3 eggs, ..."
+                className='new-recipe-textarea'
+                type="text"
+                id="ingredients"
+                value={ingredients}
+                onChange={e => setIngredients(e.target.value)}
+                required />
+              <label className='new-recipe-label' htmlFor="steps">Steps (comma separated):</label>
+              <textarea
+                placeholder="i.e: 1. Crack two eggs and whisk, 2. Evenly coat chicken thighs in the whisked eggs, 3. ..."
+                className='new-recipe-textarea'
+                type="text"
+                id="steps"
+                value={steps}
+                onChange={e => setSteps(e.target.value)}
+                required />
               <button className='new-recipe-submit' type="submit">Submit Recipe</button>
             </form>
           </div>

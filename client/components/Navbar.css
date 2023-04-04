@@ -98,6 +98,15 @@
   z-index: 1;
 }
 
+.chef-hat {
+  color: whitesmoke;
+  font-size: 7rem;
+  display: flex;
+  justify-content: center;
+  margin-right: 2rem;
+  padding-bottom: 2rem;
+}
+
 .nav-item {
   height: 5rem;
   align-self: center;
