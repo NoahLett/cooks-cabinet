@@ -91,6 +91,45 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/recipes', (req, res, next) => {
+  const sql = `
+    select "recipeId",
+          "name",
+          "description",
+          "photoUrl"
+      from "recipes"
+  `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.get('/api/recipes/:recipeId', (req, res, next) => {
+  const recipeId = Number(req.params.recipeId);
+  if (!recipeId) {
+    throw new ClientError(400, 'recipeId must be a positive integer');
+  }
+  const sql = `
+    select "recipeId",
+          "name",
+          "description",
+          "photoUrl",
+          "steps",
+          "ingredients"
+      from "recipes"
+      where "recipeId" = $1
+  `;
+  const params = [recipeId];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `cannot find recipe with recipeId ${recipeId}`);
+      }
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/new-recipe', authorizationMiddleware, (req, res, next) => {
   const { userId } = req.user;
   const { name, description, photoUrl, steps, ingredients } = req.body;
