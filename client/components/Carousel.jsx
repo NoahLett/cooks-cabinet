@@ -19,7 +19,7 @@ export default function Carousel() {
   };
 
   return (
-    <div className='container'>
+    <div className='carousel-container'>
       <h2 className="favs">Featured Favs</h2>
       <div className="carousel">
         {slides.map((slide, index) => (

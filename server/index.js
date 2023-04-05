@@ -91,6 +91,19 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/recipes', (req, res, next) => {
+  const sql = `
+    select "recipeId",
+          "name",
+          "description",
+          "photoUrl"
+      from "recipes"
+  `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
 app.post('/api/new-recipe', authorizationMiddleware, (req, res, next) => {
   const { userId } = req.user;
   const { name, description, photoUrl, steps, ingredients } = req.body;
