@@ -55,7 +55,7 @@ export default function NewRecipe() {
             <form className='new-recipe-form' onSubmit={handleSubmit}>
               <label className='new-recipe-label' htmlFor="name">Recipe Name:</label>
               <input
-                placeholder="i.e.: Fried Chicken"
+                placeholder="Fried Chicken"
                 className='new-recipe-input-field'
                 type="text"
                 id="name"
@@ -64,7 +64,7 @@ export default function NewRecipe() {
                 required />
               <label className='new-recipe-label' htmlFor="photoUrl">Photo URL:</label>
               <input
-                placeholder="i.e.: https://food-picture.com/"
+                placeholder="https://food-picture.com/"
                 className='new-recipe-input-field'
                 type="text"
                 id="photoUrl"
@@ -74,7 +74,7 @@ export default function NewRecipe() {
               <label className='new-recipe-label' htmlFor="description">Description:</label>
               <textarea
                 className='new-recipe-textarea'
-                placeholder="i.e.: The best comfort food you'll ever make!"
+                placeholder="The best comfort food you'll ever make!"
                 id="description"
                 value={description}
                 onChange={e => setDescription(e.target.value)}
@@ -90,7 +90,7 @@ export default function NewRecipe() {
                 required />
               <label className='new-recipe-label' htmlFor="steps">Steps (comma separated):</label>
               <textarea
-                placeholder="i.e: 1. Crack two eggs and whisk, 2. Evenly coat chicken thighs in the whisked eggs, 3. ..."
+                placeholder="1. Crack two eggs and whisk, 2. Evenly coat chicken thighs in the whisked eggs, 3. ..."
                 className='new-recipe-textarea'
                 type="text"
                 id="steps"

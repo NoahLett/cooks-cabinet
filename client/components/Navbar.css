@@ -56,6 +56,13 @@
   font-size: 1.05rem;
 }
 
+.user-button:hover {
+  background-color: #ee6e73;
+  border: none;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
 .user-link {
   text-decoration: none;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
@@ -81,7 +88,8 @@
   flex-direction: column;
   justify-content: center;
   list-style: none;
-  width: 90%;
+  width: 80%;
+  max-width: 30rem;
   height: 100vh;
   position: absolute;
   top: 4rem;
@@ -93,7 +101,7 @@
 .nav-menu.active {
   background: lightgrey;
   left: 0;
-  opacity: 0.95;
+  opacity: 1;
   transition: all 0.5s ease;
   z-index: 1;
 }
@@ -125,6 +133,6 @@
 }
 
 .nav-links:hover {
-  color: #0096c7;
+  color: #ee6e73;
   transition: all 0.2s ease-out;
 }
