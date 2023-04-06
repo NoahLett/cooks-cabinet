@@ -9,15 +9,16 @@
 .cards {
   place-items: center center;
   display: grid;
-  grid-template-columns: repeat(auto-fit);
-  padding: 0.75rem;
-  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  padding: 1.5rem;
+  grid-gap: 2rem;
 }
 
 .card {
   background-color: white;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.18);
-  height: 20rem;
+  height: 25rem;
+  max-width: 20rem;
 }
 
 .recipe-link {
@@ -27,7 +28,6 @@
 
 .card-img-top {
   width: 100%;
-  max-width: 20rem;
   height: 66%;
   object-fit: cover;
   clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
@@ -42,9 +42,14 @@
 }
 
 .card-text {
-  padding: 1rem 0;
-  margin: 0;
+  padding: 0.75rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-  margin-left: 1rem;
+  margin: 0.5rem;
   font-size: 1.15rem;
+  /* stylelint-disable-next-line value-no-vendor-prefix */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 4.75rem;
 }
