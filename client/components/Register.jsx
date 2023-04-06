@@ -163,7 +163,7 @@ const Register = () => {
             <p>
               Already Registered? <br/>
               <span>
-                <Link className='sign-in-link' to='/'>Sign In</Link>
+                <Link className='sign-in-link' to='/signin'>Sign In</Link>
               </span>
             </p>
           </div>
