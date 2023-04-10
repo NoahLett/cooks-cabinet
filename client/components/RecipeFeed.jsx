@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './RecipeFeed.css';
 
-function RecipeFeed() {
+function RecipeFeed(props) {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {

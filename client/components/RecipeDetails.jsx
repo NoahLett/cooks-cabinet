@@ -5,11 +5,14 @@ export default function RecipeDetails(props) {
 
   const [recipe, setRecipe] = useState(null);
 
+  const { params } = props.match ?? {};
+  const { recipeId } = params ?? {};
+
   useEffect(() => {
-    fetch(`/api/recipes/${props.recipeId}`)
+    fetch(`/api/recipes/${Number(recipeId)}`)
       .then(res => res.json())
       .then(recipe => setRecipe({ recipe }));
-  }, [props.recipeId]);
+  }, [recipeId]);
 
   if (!recipe) return null;
 
@@ -22,12 +25,12 @@ export default function RecipeDetails(props) {
       <h3 className='rec-desc'>{description}</h3>
       <img className='rec-photo' src={photoUrl} alt="rec-photo" />
       <ul>
-        {ingredients.map((ingredient, index) => (
+        {ingredients && ingredients.map((ingredient, index) => (
           <li key={index}>{ingredient}</li>
         ))}
       </ul>
       <ol>
-        {steps.map((step, index) => (
+        {steps && steps.map((step, index) => (
           <li key={index}>{step}</li>
         ))}
       </ol>
