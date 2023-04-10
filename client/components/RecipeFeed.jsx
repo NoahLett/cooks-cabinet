@@ -30,7 +30,7 @@ function Recipe(props) {
   return (
     <div className='card'>
       <Link
-      to={`/recipes?recipeId=${recipeId}`}
+      to={`/recipes/${recipeId}`}
       className='recipe-link'
     >
         <img src={photoUrl} className='card-img-top' alt={name} />
