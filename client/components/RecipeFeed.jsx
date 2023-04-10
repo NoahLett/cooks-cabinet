@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './RecipeFeed.css';
 
-function RecipeFeed() {
+function RecipeFeed(props) {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function Recipe(props) {
   return (
     <div className='card'>
       <Link
-      to={`/recipes?recipeId=${recipeId}`}
+      to={`/recipes/${recipeId}`}
       className='recipe-link'
     >
         <img src={photoUrl} className='card-img-top' alt={name} />
