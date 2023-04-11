@@ -21,7 +21,7 @@ export default class App extends React.Component {
               <Route path='/signup' element={<SignUp/>} />
               <Route path='/signin' element={<Login/>} />
               <Route path='/userform' element={<UserForm/>}/>
-              <Route path='/recipes/:recipeId' element={<RecipeDetails />}/>
+              <Route path="/recipes/:recipeId" element={<RecipeDetails />}/>
             </Routes>
           </Router>
         </div>
