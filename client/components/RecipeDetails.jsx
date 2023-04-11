@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './RecipeDetails.css';
 
 export default function RecipeDetails(props) {
 
@@ -20,20 +21,20 @@ export default function RecipeDetails(props) {
 
   return (
     <div className='rec-container'>
-      <Link to='/'>Back</Link>
+      <img className='rec-photo' src={photoUrl} alt="rec-photo" />
       <h1 className='rec-name'>{name}</h1>
       <h3 className='rec-desc'>{description}</h3>
-      <img className='rec-photo' src={photoUrl} alt="rec-photo" />
-      <ul>
+      <ul className='ingredients-list'>
         {ingredients && ingredients.map((ingredient, index) => (
           <li key={index}>{ingredient}</li>
         ))}
       </ul>
-      <ol>
+      <ol className='steps-list'>
         {steps && steps.map((step, index) => (
           <li key={index}>{step}</li>
         ))}
       </ol>
+      <Link className='back-link' to='/'>Back</Link>
     </div>
   );
 }
