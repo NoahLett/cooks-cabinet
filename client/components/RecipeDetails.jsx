@@ -5,13 +5,13 @@ export default function RecipeDetails(props) {
 
   const [recipe, setRecipe] = useState(null);
 
-  const { params } = props.match ?? {};
-  const { recipeId } = params ?? {};
+  const urlArray = window.location.href.split('/');
+  const recipeId = urlArray[4];
 
   useEffect(() => {
     fetch(`/api/recipes/${Number(recipeId)}`)
       .then(res => res.json())
-      .then(recipe => setRecipe({ recipe }));
+      .then(recipe => setRecipe(recipe));
   }, [recipeId]);
 
   if (!recipe) return null;
